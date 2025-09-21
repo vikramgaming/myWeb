@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Battle Royale</title>
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+    
+    <div class="Mainmenu">
+      <h1 id="tittle">Battle Royale</h1><br>
+      <button id="play" onclick="start()">Play</button>
+      <button id="Settings" onclick="settings()">Settings</button>
+      <div class="copyright">
+        <p class="text" id="CRyū">&copy;Code By : Ryū</p>
+        <p class="text" id="CRexxa">&copy;Art By : Rexxa</p>
+        <p class="text" id="CHilmi">&copy;Sound By : Hilmi</p>
+      </div>
+    </div>
+    
+    <div class="settings hidden">
+      <button id="exit" onclick="exit()">Exit</button>
+      
+      <label for="volume">Volume :
+        <input type="range" id="volume" min="0" max="100" value="50">
+        <span id="output">0.50</span>
+      </label><br>
+      
+      <label > Dev Mode :
+        <div class="switch">
+          <input type="checkbox" class="check" id="dev">
+          <span class="slider"></span>
+        </div>
+      </label>
+    </div>
+ 
+  <div class="Maingame hidden">
+  <canvas id="GameCanvas"></canvas>
+  <button id="exit" onclick="stop()">Exit</button>
+  <h1 id="entities"></h1>
+  <h1 id="GameOver"></h1>
+  </div>
+  
+  <script src="Play/Player.js"></script>
+  <script src="Play/enemy.js"></script>
+  <script src="Play/obstacle.js"></script>
+  <script src="Running.js"></script>
+</body>
+</html>
