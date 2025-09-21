@@ -463,8 +463,8 @@ const canvas = document.getElementById("GameCanvas");
 const ctx = canvas.getContext("2d");
 const count = document.getElementById("entities"); //menghitung musuh
 
-const fire = new Audio("play/audio/fire.ogg");
-const enemyFire = new Audio("play/audio/fire.ogg");
+const fire = new Audio("Play/audio/fire.ogg");
+const enemyFire = new Audio("Play/audio/fire.ogg");
 const vol = document.getElementById("volume");
 const output = document.getElementById("output");
 
