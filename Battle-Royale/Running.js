@@ -2,18 +2,9 @@ const canvas = document.getElementById("GameCanvas");
 const ctx = canvas.getContext("2d");
 const count = document.getElementById("entities"); //menghitung musuh
 
-<<<<<<< HEAD
-const fire = new Audio("/play/audio/fire.ogg");
-const enemyFire = new Audio("/play/audio/fire.ogg");
-=======
-<<<<<<< HEAD
 const fire = new Audio("Play/audio/fire.ogg");
 const enemyFire = new Audio("Play/audio/fire.ogg");
-=======
-const fire = new Audio("/play/audio/fire.ogg");
-const enemyFire = new Audio("/play/audio/fire.ogg");
->>>>>>> 5444c30 (update)
->>>>>>> c5f31ef
+
 const vol = document.getElementById("volume");
 const output = document.getElementById("output");
 
