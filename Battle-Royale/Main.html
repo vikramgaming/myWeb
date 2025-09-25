@@ -13,9 +13,9 @@
       <button id="play" onclick="start()">Play</button>
       <button id="Settings" onclick="settings()">Settings</button>
       <div class="copyright">
-        <p class="text" id="CRyū">&copy;Code By : Ryū</p>
-        <p class="text" id="CRexxa">&copy;Art By : Rexxa</p>
-        <p class="text" id="CHilmi">&copy;Sound By : Hilmi</p>
+        <p>&copy;Code By : Ryū</p>
+        <p>&copy;Art By : Rexxa</p>
+        <p>&copy;Sound By : Hilmi</p>
       </div>
     </div>
     
@@ -36,10 +36,13 @@
     </div>
  
   <div class="Maingame hidden">
-  <canvas id="GameCanvas"></canvas>
-  <button id="exit" onclick="stop()">Exit</button>
-  <h1 id="entities"></h1>
-  <h1 id="GameOver"></h1>
+    <canvas id="GameCanvas"></canvas>
+    <button id="exit" onclick="stop()">Exit</button>
+    <div id="container">
+      <div class="killBG"></div>
+    </div>
+    <h1 id="entities"></h1>
+    <h1 id="GameOver"></h1>
   </div>
   
   <script src="Play/Player.js"></script>

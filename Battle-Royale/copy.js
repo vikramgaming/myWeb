@@ -416,8 +416,8 @@ class Obs {
     //mencari posisi obstacles
     while (!valid) {
       this.randomPos = new Vector2(
-        Math.round(Math.random() * (this.limit.x - size)),
-        Math.round(Math.random() * (this.limit.y - size))
+        Math.floor(Math.random() * (this.limit.x - size)),
+        Math.floor(Math.random() * (this.limit.y - size))
       );
 
       const distToPlayer = this.randomPos.sub(player.pos).mag();
@@ -427,7 +427,7 @@ class Obs {
       for (let obs of obstacles) {
         const dx = this.randomPos.x - obs.pos.x;
         const dy = this.randomPos.y - obs.pos.y;
-        const d = Math.sqrt(dx**2 + dy**2);
+        const d = Math.sqrt(dx * dx + dy * dy);
         if (d < minObsDist) { 
           tooClose = true; 
           break;
@@ -459,12 +459,40 @@ class Obs {
   }
 }
 
+function killNotif(kill, killed) {
+  if (activeNotif.length >= 3) {
+    const active = activeNotif.shift();
+    active.style.left = "-100%";
+  }
+  if (activeNotif.length > 0) {
+    const active = activeNotif;
+    active.forEach(bg => {bg.style.transform += "translateY(-20px)"});
+  }
+  
+  const container = document.getElementById("container");
+  const newNotif = document.createElement("div");
+  newNotif.classList.add("killBG");
+  newNotif.innerHTML = `<p id='kill'>${kill}</p><p id='killed'>${killed}</p>`;
+  
+  container.appendChild(newNotif);
+  setTimeout(() => {
+    newNotif.style.left = "0%";
+    setTimeout(() => {
+      newNotif.style.left = "-100%";
+      setTimeout(() => {newNotif.remove();}, 350);
+      activeNotif = activeNotif.filter(box => box !== newNotif);
+    }, 2500);
+  }, 50);
+  
+  activeNotif.push(newNotif);
+}
+
 const canvas = document.getElementById("GameCanvas");
 const ctx = canvas.getContext("2d");
 const count = document.getElementById("entities"); //menghitung musuh
 
-const fire = new Audio("play/audio/fire.ogg");
-const enemyFire = new Audio("play/audio/fire.ogg");
+const fire = new Audio("/play/audio/fire.ogg");
+const enemyFire = new Audio("/play/audio/fire.ogg");
 const vol = document.getElementById("volume");
 const output = document.getElementById("output");
 
@@ -506,6 +534,7 @@ let bullets = [];       // peluru player
 let enemyBullets = [];  // peluru musuh
 let obstacles = [];
 let enemies = [];
+let activeNotif = [];
 
 //Settings
 vol.addEventListener("input", () => {
@@ -583,6 +612,7 @@ function start() {
             enemies[e].hp--; // HP musuh berkurang
             if (enemies[e].hp <= 0) {
               enemies.splice(e, 1); // musuh mati
+              killNotif("player", e);
               entities--;
             }
             break;
@@ -640,6 +670,7 @@ function start() {
             enemies[e].hp--;
             if (enemies[e].hp <= 0) {
               enemies.splice(e, 1);
+              killNotif("player", e);
               entities--;
             }
             break;

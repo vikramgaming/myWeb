@@ -2,8 +2,8 @@ const canvas = document.getElementById("GameCanvas");
 const ctx = canvas.getContext("2d");
 const count = document.getElementById("entities"); //menghitung musuh
 
-const fire = new Audio("play/audio/fire.ogg");
-const enemyFire = new Audio("play/audio/fire.ogg");
+const fire = new Audio("/play/audio/fire.ogg");
+const enemyFire = new Audio("/play/audio/fire.ogg");
 const vol = document.getElementById("volume");
 const output = document.getElementById("output");
 
@@ -45,6 +45,7 @@ let bullets = [];       // peluru player
 let enemyBullets = [];  // peluru musuh
 let obstacles = [];
 let enemies = [];
+let activeNotif = [];
 
 //Settings
 vol.addEventListener("input", () => {
@@ -122,6 +123,7 @@ function start() {
             enemies[e].hp--; // HP musuh berkurang
             if (enemies[e].hp <= 0) {
               enemies.splice(e, 1); // musuh mati
+              killNotif("player", e);
               entities--;
             }
             break;
@@ -179,6 +181,7 @@ function start() {
             enemies[e].hp--;
             if (enemies[e].hp <= 0) {
               enemies.splice(e, 1);
+              killNotif("player", e)
               entities--;
             }
             break;

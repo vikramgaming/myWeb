@@ -63,3 +63,31 @@ class Obs {
     }
   }
 }
+
+function killNotif(kill, killed) {
+  if (activeNotif.length >= 3) {
+    const active = activeNotif.shift();
+    active.style.left = "-100%";
+  }
+  if (activeNotif.length > 0) {
+    const active = activeNotif;
+    active.forEach(bg => {bg.style.transform += "translateY(-20px)"});
+  }
+  
+  const container = document.getElementById("container");
+  const newNotif = document.createElement("div");
+  newNotif.classList.add("killBG");
+  newNotif.innerHTML = `<p id='kill'>${kill}</p><p id='killed'>${killed}</p>`;
+  
+  container.appendChild(newNotif);
+  setTimeout(() => {
+    newNotif.style.left = "0%";
+    setTimeout(() => {
+      newNotif.style.left = "-100%";
+      setTimeout(() => {newNotif.remove();}, 350);
+      activeNotif = activeNotif.filter(box => box !== newNotif);
+    }, 2500);
+  }, 50);
+  
+  activeNotif.push(newNotif);
+}
