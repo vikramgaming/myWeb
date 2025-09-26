@@ -37,8 +37,8 @@ let loop, player, gameover;
 let entities = 0;
 
 let joysticks = [
-  new Joystick(80, height - 80, 50, 25),
-  new Joystick(width - 80, height - 80, 50, 25)
+  new Joystick(80, height - 100, 50, 25),
+  new Joystick(width - 80, height - 100, 50, 25)
 ];
 
 let bullets = [];       // peluru player
@@ -150,7 +150,13 @@ function start() {
       
         // cek kena player
         if (player.hp >= 0) {
-          let playerBox = { x: player.pos.x, y: player.pos.y, w: player.w, h: player.h };
+          let playerBox = {
+            x: player.pos.x,
+            y: player.pos.y,
+            w: player.w,
+            h: player.h
+          };
+          
           if (isColliding(bulletBox, playerBox)) {
             enemyBullets.splice(i, 1);
             player.hp--;

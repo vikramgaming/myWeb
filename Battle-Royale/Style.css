@@ -3,6 +3,8 @@
   font-family: "battle_royale";
   src: url("BATTLE ROYALE FONT.woff2")
   format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
 /* ===== Global Styles ===== */
 * {
@@ -52,6 +54,7 @@ button {
 }
 
 .Mainmenu #tittle {
+  white-space: nowrap;
   font-size: 3.3em;
   font-family: "battle_royale", sans-serif;
   font-weight: normal;
@@ -61,8 +64,6 @@ button {
 }
 
 .Mainmenu .copyright {
-  width: auto;
-  height: auto;
   position: absolute;
   bottom: 50px;
   left: 0;
@@ -71,6 +72,7 @@ button {
 }
 
 /* ===== Main Game ===== */
+
 .Maingame #GameCanvas {
   position: absolute;
   top: 0;
@@ -155,11 +157,12 @@ button {
 }
 
 .Maingame #GameOver {
-  position: relative;
-  top: 25vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: "battle_royale", sans-serif;
-  font-weight: normal;
-  font-style: normal;
+  white-space: nowrap;
   font-size: 4rem;
   color: yellow;
   text-shadow: 3px 3px 5px red;
