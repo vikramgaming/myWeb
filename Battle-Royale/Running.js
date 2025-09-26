@@ -36,6 +36,39 @@ console.log(width, height)
 let loop, player, gameover;
 let entities = 0;
 
+const enemyNames = [
+  "Varkon",
+  "Xythera",
+  "Morgath",
+  "Zarnok",
+  "Thalgris",
+  "Orekh",
+  "Drelthor",
+  "Kryvon",
+  "Zephrak",
+  "Baltrax",
+  "Nokrus",
+  "Velmor",
+  "Azrik",
+  "Torvash",
+  "Ghulmor",
+  "Zarkesh",
+  "Pyrron",
+  "Skareth",
+  "Dravenox",
+  "Ulthor",
+  "Malgrith",
+  "Vezrak",
+  "Korthul",
+  "Zygonar",
+  "Obryss",
+  "Darketh",
+  "Vorathis",
+  "Nyrgon",
+  "Kravenor",
+  "Throzak"
+];
+
 let joysticks = [
   new Joystick(80, height - 120, 50, 25),
   new Joystick(width - 80, height - 120, 50, 25)
@@ -77,7 +110,7 @@ function start() {
   document.querySelector(".Maingame").classList.remove("hidden");
 
   // spawn player
-  player = new Player(worldW, worldH, 65, 65, char1, 10);
+  player = new Player("Player" ,worldW, worldH, 65, 65, char1, 10);
   entities++;
 
   // spawn obstacles
@@ -88,7 +121,7 @@ function start() {
 
   // spawn musuh
   for (let e = 0; e < 20; e++) {
-    enemies.push(new Enemies(65, 65, char1, 5));
+    enemies.push(new Enemies(enemyNames ,65, 65, char1, 5));
     entities++;
   }
 
@@ -122,8 +155,8 @@ function start() {
             bullets.splice(i, 1); // peluru hilang
             enemies[e].hp--; // HP musuh berkurang
             if (enemies[e].hp <= 0) {
+              killNotif(player.name, enemies[e].name)
               enemies.splice(e, 1); // musuh mati
-              killNotif("player", e);
               entities--;
             }
             break;
@@ -157,6 +190,7 @@ function start() {
             if (player.hp <= 0) {
               entities--;
               if (!gameover)
+              killNotif(enemyBullets[i].shooter.name, player.name);
               document.getElementById("GameOver").textContent = "Game Over";
               document.getElementById("GameOver").style.display = "block";
               gameover = true;
@@ -180,8 +214,8 @@ function start() {
             enemyBullets.splice(i, 1);
             enemies[e].hp--;
             if (enemies[e].hp <= 0) {
+              killNotif(enemyBullets[i].shooter.name, enemies[e].name);
               enemies.splice(e, 1);
-              killNotif("player", e)
               entities--;
             }
             break;
@@ -257,4 +291,6 @@ function stop() {
   clearInterval(loop);
   player = null;
   loop = null;
+  const active = activeNotif;
+  active.forEach(bg => bg.style.left = "-100%")
 }

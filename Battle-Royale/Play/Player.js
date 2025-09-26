@@ -104,7 +104,8 @@ function img(...sources) {
 }
 
 class Player {
-  constructor(maxX, maxY, w, h, sprites, hp) {
+  constructor(name ,maxX, maxY, w, h, sprites, hp) {
+    this.name = name;
     this.pos = new Vector2(
       Math.floor(Math.random() * (maxX - 70)),
       Math.floor(Math.random() * (maxY - 70)));// posisi random player
@@ -159,7 +160,7 @@ class Player {
       const shootDir = fireJoystick.pos.sub(fireJoystick.origin);
       if (fireJoystick.ondrag && shootDir.mag() > 5) {
         if (!this.shootCooldown) {
-          bullets.push(new Bullets(this.pos.x + this.w / 2, this.pos.y + this.h / 2, shootDir));
+          bullets.push(new Bullets(this.pos.x + this.w / 2, this.pos.y + this.h / 2, shootDir, this));
           try { fire.play(); } catch (e) {};
           this.shootCooldown = 30; // cooldown
         }
@@ -188,7 +189,13 @@ class Player {
       else {
         ctx.drawImage(this.sprites[this.frameIndex], this.pos.x - camera.x, this.pos.y - camera.y, this.w, this.h);
       }
-      // bar HP musuh
+      // nama player
+      ctx.font = "16px Arial";
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      ctx.fillText(this.name, (this.pos.x + this.w / 2 ) - camera.x, this.pos.y - camera.y - 20);
+      
+      // bar HP player
       ctx.fillStyle = "black";
       ctx.fillRect(this.pos.x - camera.x, this.pos.y - camera.y - 10, this.w, 5);
       ctx.fillStyle = "lime";
@@ -206,7 +213,7 @@ class Player {
 }
 
 class Bullets {
-  constructor(x, y, dir, shooter=null) {
+  constructor(x, y, dir, shooter) {
     this.pos = new Vector2(x, y); // posisi awal peluru
     this.dir = dir.norm(); // arah tembakan (normalisasi biar konsisten)
     this.speed = 3; // kecepatan peluru

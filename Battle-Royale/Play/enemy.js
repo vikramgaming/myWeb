@@ -1,5 +1,6 @@
 class Enemies {
-  constructor(w, h, sprites, hp) {
+  constructor(name ,w, h, sprites, hp) {
+    this.name = name[Math.floor(Math.random() * name.length - 1) + 1];
     this.w = w; // lebar musuh
     this.h = h; // tinggi musuh
     this.hp = hp; // darah musuh
@@ -140,6 +141,12 @@ class Enemies {
         ctx.drawImage(this.sprites[this.frameIndex], this.pos.x - camera.x, this.pos.y - camera.y, this.w, this.h);
       }
     }
+    
+    // nama musuh
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText(this.name, (this.pos.x + this.w / 2) - camera.x, this.pos.y - camera.y - 20);
 
     // bar HP musuh
     ctx.fillStyle = "black";
