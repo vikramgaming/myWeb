@@ -37,8 +37,8 @@ let loop, player, gameover;
 let entities = 0;
 
 let joysticks = [
-  new Joystick(80, height - 100, 50, 25),
-  new Joystick(width - 80, height - 100, 50, 25)
+  new Joystick(80, height - 120, 50, 25),
+  new Joystick(width - 80, height - 120, 50, 25)
 ];
 
 let bullets = [];       // peluru player
