@@ -161,7 +161,7 @@ class Player {
       if (fireJoystick.ondrag && shootDir.mag() > 5) {
         if (!this.shootCooldown) {
           bullets.push(new Bullets(this.pos.x + this.w / 2, this.pos.y + this.h / 2, shootDir, this));
-          try { fire.play(); } catch (e) {};
+          try { fire.play(); } catch (e) {}
           this.shootCooldown = 30; // cooldown
         }
       }

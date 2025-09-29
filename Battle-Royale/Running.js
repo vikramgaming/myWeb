@@ -1,5 +1,6 @@
 const canvas = document.getElementById("GameCanvas");
 const ctx = canvas.getContext("2d");
+console.log(ctx);
 const count = document.getElementById("entities"); //menghitung musuh
 
 const fire = new Audio("Play/audio/fire.ogg");
@@ -18,7 +19,7 @@ let char1 = img(
 
 let obsImgs = img(
   "Play/box.png"
-)
+);
 
 const width = canvas.width = window.innerWidth;
 const height = canvas.height = window.innerHeight;
@@ -29,9 +30,10 @@ let camera = {
       y: 0,
       w: canvas.width,
       h: canvas.height
-}
+};
+
 const FPS = 120;
-console.log(width, height)
+console.log(width, height);
 
 let loop, player, gameover;
 let entities = 0;
@@ -155,7 +157,7 @@ function start() {
             bullets.splice(i, 1); // peluru hilang
             enemies[e].hp--; // HP musuh berkurang
             if (enemies[e].hp <= 0) {
-              killNotif(player.name, enemies[e].name)
+              killNotif(player.name, enemies[e].name);
               enemies.splice(e, 1); // musuh mati
               entities--;
             }
