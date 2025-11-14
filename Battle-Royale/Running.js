@@ -1,6 +1,5 @@
 const canvas = document.getElementById("GameCanvas");
 const ctx = canvas.getContext("2d");
-console.log(ctx);
 const count = document.getElementById("entities"); //menghitung musuh
 
 const fire = new Audio("Play/audio/fire.ogg");
